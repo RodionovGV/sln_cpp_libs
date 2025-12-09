@@ -2,25 +2,18 @@
 //
 
 #include <iostream>
-#include <boost/filesystem.hpp>
+#include <locale.h>
+
+// boost_filesystem.cpp
+int fs_main();
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     std::cout << "Hello World!\n";
-    boost::filesystem::path p("D:\\g_rodionov\\");
-    bool check = boost::filesystem::exists(p);
-    if (check) {
-        std::cout << "Exist" << std::endl;
-        create_directory(p / "newdir");
 
-    }
-    else {
-        std::cout << "NOT Exist" << std::endl;
-    }
-    for (auto& entry : boost::filesystem::directory_iterator(p)) {
-        std::cout << entry.path() << std::endl;
-    }
-    std::cout << "Root path: " << p << std::endl;
+     fs_main();
+
     return 0;
 }
 
