@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <!-- Основной путь к Boost -->
+    <BOOST_ROOT>C:\local\boost_1_90_0</BOOST_ROOT>
+    
+    <!-- Версия Boost -->
+    <BOOST_VERSION>1_90_0</BOOST_VERSION>
+    
+    <!-- Архитектура (измените на x86 если нужно 32-bit) -->
+    <BOOST_PLATFORM>x64</BOOST_PLATFORM>
+    
+    <!-- Версия компилятора (14.3 = VS 2022) -->
+    <BOOST_COMPILER>vc143</BOOST_COMPILER>
+    
+    <!-- Путь к библиотекам (обратите внимание на имя папки lib64-msvc-14.3) -->
+    <BOOST_LIB_DIR>$(BOOST_ROOT)\lib64-msvc-14.3</BOOST_LIB_DIR>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- Путь к заголовочным файлам -->
+    <IncludePath>$(BOOST_ROOT);$(IncludePath)</IncludePath>
+    
+    <!-- Путь к библиотекам -->
+    <LibraryPath>$(BOOST_LIB_DIR);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+
+ <!-- Настройки компилятора для лучшей поддержки -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <!-- Включаем дополнительные каталоги для препроцессора -->
+      <AdditionalIncludeDirectories>$(BOOST_ROOT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      
+      <!-- Для C++17 и выше (Boost.Filesystem требует) -->
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <CppLanguageStandard>stdcpp17</CppLanguageStandard>
+      
+      <!-- Оптимизации для отладки -->
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    
+    <Link>
+      <AdditionalDependencies>
+        <!-- Пример для Boost.Filesystem -->
+        <!-- Проверьте точные имена файлов в вашей папке lib64-msvc-14.3 -->
+        boost_filesystem-vc143-mt-x64-1_90.lib;
+        boost_system-vc143-mt-x64-1_90.lib;
+        $(AdditionalDependencies)
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  
+</Project>
